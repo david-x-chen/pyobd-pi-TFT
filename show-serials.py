@@ -1,7 +1,7 @@
-import serial
-from obd_utils import serial
+import bluetooth
 
-portnames = scanSerial()
-print portnames
-for port in portnames:
-    print port
+nearby_devices = bluetooth.discover_devices(lookup_names=True)
+print("found %d devices" % len(nearby_devices))
+
+for addr, name in nearby_devices:
+    print(" %s - %s " % (addr, name))
