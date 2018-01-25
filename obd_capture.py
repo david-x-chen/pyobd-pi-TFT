@@ -58,6 +58,7 @@ class OBD_Capture():
 
         for supportedSensor in self.supportedSensorList:
             text += "supported sensor index = " + str(supportedSensor[0]) + " " + str(supportedSensor[1].shortname) + "\n"
+            print(text)
 
         time.sleep(3)
 
