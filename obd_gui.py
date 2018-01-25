@@ -323,6 +323,10 @@ class OBDLoadingPanel(wx.Panel):
         """
         super(OBDLoadingPanel, self).__init__(*args, **kwargs)
 
+        # close button
+        closeBtn = wx.Button(self, label="Close")
+        closeBtn.Bind(wx.EVT_BUTTON, self.onClose)
+
         # Background image
         image = wx.Image(BACKGROUND_FILENAME)
         width, height = wx.GetDisplaySize()
@@ -423,6 +427,9 @@ class OBDLoadingPanel(wx.Panel):
 
     def Paint(self, dc):
         dc.DrawBitmap(self.bitmap, 0, 0)
+
+    def onClose(self, event):
+        self.Close()
 
 #-------------------------------------------------------------------------------
 
