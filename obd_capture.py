@@ -45,9 +45,6 @@ class OBD_Capture():
         self.supportedSensorList = []
         self.unsupportedSensorList = []
 
-        print(len(self.supp))
-        print(len(obd_sensors.SENSORS))
-
         # loop through PIDs binary
         for i in range(0, len(self.supp)):
             if (i + 1) < len(obd_sensors.SENSORS):
@@ -75,7 +72,6 @@ class OBD_Capture():
             sensorIndex = supportedSensor[0]
             (name, value, unit) = self.port.sensor(sensorIndex)
             text += name + " = " + str(value) + " " + str(unit) + "\n"
-            print("values: %s %s %s" % (name, value, unit))
 
         return text
 
