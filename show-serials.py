@@ -1,7 +1,5 @@
-import bluetooth
+from obd_capture import OBD_Capture
 
-nearby_devices = bluetooth.discover_devices(lookup_names=True)
-print("found %d devices" % len(nearby_devices))
-
-for addr, name in nearby_devices:
-    print(" %s - %s " % (addr, name))
+OBD_Capture.connect()
+obddata = OBD_Capture.capture_data
+print(obddata)
