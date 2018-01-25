@@ -208,6 +208,7 @@ class OBDPort:
          cmd = sensor.cmd
          self.send_command(cmd)
          data = self.get_result()
+         print(data)
 
          if data:
              data = self.interpret_result(data)
