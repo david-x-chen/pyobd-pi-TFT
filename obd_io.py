@@ -168,9 +168,6 @@ class OBDPort:
 
          # first 4 characters are code from ELM
          code = code[4:]
-
-         # Actual data bytes
-         code = code[4:]
          return code
 
      def get_result(self):
@@ -215,6 +212,7 @@ class OBDPort:
          if data:
              data = self.interpret_result(data)
              if data != "NODATA":
+                 print(data)
                  data = sensor.value(data)
          else:
              return "NORESPONSE"
