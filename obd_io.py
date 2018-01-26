@@ -212,7 +212,6 @@ class OBDPort:
          if data:
              data = self.interpret_result(data)
              if data != "NODATA":
-                 print(data)
                  data = sensor.value(data)
          else:
              return "NORESPONSE"
