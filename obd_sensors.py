@@ -26,60 +26,71 @@ def hex_to_int(str):
     i = eval("0x" + str, {}, {})
     return i
 
+# AirFlow Rate(MAF) # data bytes:2
 def maf(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:4]
     code = hex_to_int(code)
     return code * 0.00132276
 
+# Throttle Position # data bytes:1
 def throttle_pos(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:2]
     code = hex_to_int(code)
     return code * 100.0 / 255.0
 
+# Intake manifold absolute pressure  # data bytes:1
 def intake_m_pres(code): # in kPa
-    code = code[0:4] # data bytes:2
+    code = code[0:2]
     code = hex_to_int(code)
     return code / 0.14504
 
+# Engine RPM # data bytes:2
 def rpm(code):
-    print(code)
-    code = code[0:4] # data bytes:2
-    print(code)
+    code = code[0:4]
     code = hex_to_int(code)
     return code / 4
 
-def speed(code):
-    code = code[0:4] # data bytes:2
+# Vehicle Speed # data bytes:1
+def speed(code): # in km/h
+    code = code[0:2]
     code = hex_to_int(code)
-    return code / 1.609
+    return code
+    #return code / 1.609
 
+# Calculated engine load # data bytes:1
 def percent_scale(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:2]
     code = hex_to_int(code)
     return code * 100.0 / 255.0
 
+# Timing Advance # data bytes:1
 def timing_advance(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:2]
     code = hex_to_int(code)
     return (code - 128) / 2.0
 
+# Engine Start MIN / Engine Run MIL # data bytes:2
 def sec_to_min(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:4]
     code = hex_to_int(code)
     return code / 60
 
+# Intake air temperature # data bytes:1
 def temp(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:2]
     code = hex_to_int(code)
     c = code - 40
     return 32 + (9 * c / 5)
 
+# data bytes:1
 def cpass(code):
+    code = code[0:2]
     #fixme
     return code
 
+# O2 Sensor  # data bytes:2
 def fuel_trim_percent(code):
-    code = code[0:4] # data bytes:2
+    code = code[0:4]
     code = hex_to_int(code)
     #return (code - 128.0) * 100.0 / 128
     return (code - 128) * 100 / 128
