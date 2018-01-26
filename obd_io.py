@@ -168,6 +168,9 @@ class OBDPort:
 
          # first 4 characters are code from ELM
          code = code[4:]
+
+         # Actual data bytes
+         code = code[4:]
          return code
 
      def get_result(self):
@@ -208,7 +211,6 @@ class OBDPort:
          cmd = sensor.cmd
          self.send_command(cmd)
          data = self.get_result()
-         print(data)
 
          if data:
              data = self.interpret_result(data)

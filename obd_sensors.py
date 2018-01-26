@@ -39,12 +39,10 @@ def intake_m_pres(code): # in kPa
     return code / 0.14504
 
 def rpm(code):
-    code = code[0:4] # Data bytes = 2
     code = hex_to_int(code)
     return code / 4
 
 def speed(code):
-    code = code[0:2]
     code = hex_to_int(code)
     return code / 1.609
 
