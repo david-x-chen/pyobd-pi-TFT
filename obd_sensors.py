@@ -27,47 +27,49 @@ def hex_to_int(str):
     return i
 
 def maf(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return code * 0.00132276
 
 def throttle_pos(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return code * 100.0 / 255.0
 
 def intake_m_pres(code): # in kPa
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return code / 0.14504
 
 def rpm(code):
-    code = code[4:] # data bytes:2
+    print(code)
+    code = code[0:4] # data bytes:2
+    print(code)
     code = hex_to_int(code)
     return code / 4
 
 def speed(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return code / 1.609
 
 def percent_scale(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return code * 100.0 / 255.0
 
 def timing_advance(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return (code - 128) / 2.0
 
 def sec_to_min(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     return code / 60
 
 def temp(code):
-    code = code[4:] # data bytes:2
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     c = code - 40
     return 32 + (9 * c / 5)
@@ -77,7 +79,7 @@ def cpass(code):
     return code
 
 def fuel_trim_percent(code):
-    code = code[4:] # data bytes:2 
+    code = code[0:4] # data bytes:2
     code = hex_to_int(code)
     #return (code - 128.0) * 100.0 / 128
     return (code - 128) * 100 / 128
