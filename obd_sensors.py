@@ -75,12 +75,13 @@ def sec_to_min(code):
     code = hex_to_int(code)
     return code / 60
 
-# Intake air temperature # data bytes:1
-def temp(code):
+# temperature # data bytes:1
+def temp(code): # in °C
     code = code[0:2]
     code = hex_to_int(code)
     c = code - 40
-    return 32 + (9 * c / 5)
+    #return 32 + (9 * c / 5) in F
+    return c
 
 # data bytes:1
 def cpass(code):
