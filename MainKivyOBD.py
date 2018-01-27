@@ -101,7 +101,7 @@ class OBDWidget(GridLayout):
                 break
 
             if failedCount > 5:
-                self.root.stop.set()
+                self.stop.set()
 
             failedCount += 1
 
