@@ -40,7 +40,7 @@ class OBDWidget(GridLayout):
         self.stop_test()
 
         # Start a new thread with an infinite loop and stop the current one.
-        threading.Thread(target=self.infinite_loop).start()
+        threading.Thread(target=self.connect, args=(None,)).start()
 
     def start_test(self, *args):
 
@@ -71,18 +71,6 @@ class OBDWidget(GridLayout):
         self.lab_2.text = str(int(self.lab_2.text) + 1)
 
         self.remove_widget(self.anim_box)
-
-    def infinite_loop(self):
-
-        self.connect(None)
-        iteration = 0
-        while True:
-            if self.stop.is_set():
-                # Stop running this thread so the main Python process can exit.
-                return
-            iteration += 1
-            print('Infinite loop, iteration {}.'.format(iteration))
-            time.sleep(1)
 
     def connect(self, event):
         print("connecting...")
