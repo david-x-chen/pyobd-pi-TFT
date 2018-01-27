@@ -20,15 +20,9 @@
             size: self.size
 
     anim_box: anim_box
-    but_1: but_1
     lab_1: lab_1
     lab_2: lab_2
-
-    Button:
-        id: but_1
-        font_size: 20
-        text: 'Start second thread'
-        on_press: root.start_second_thread(lab_2.text)
+    status_lbl: status_lbl
 
     Label:
         id: lab_1
@@ -45,3 +39,9 @@
         font_size: 100
         color: 0.8, 0, 0, 1
         text: '3'
+
+    Label:
+        id: status_lbl
+        #font_size: 100
+        color: 0.8, 0, 0, 1
+        text: "Connecting..."

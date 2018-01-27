@@ -43,8 +43,6 @@ class OBDWidget(GridLayout):
         threading.Thread(target=self.infinite_loop).start()
 
     def start_test(self, *args):
-        # Remove the button.
-        self.remove_widget(self.but_1)
 
         # Update a widget property.
         self.lab_1.text = ('The UI remains responsive while the '
@@ -75,6 +73,8 @@ class OBDWidget(GridLayout):
         self.remove_widget(self.anim_box)
 
     def infinite_loop(self):
+
+        self.connect(None)
         iteration = 0
         while True:
             if self.stop.is_set():
@@ -84,8 +84,50 @@ class OBDWidget(GridLayout):
             print('Infinite loop, iteration {}.'.format(iteration))
             time.sleep(1)
 
+    def connect(self, event):
+        print("connecting...")
+
+        # Connection
+        self.c = None
+
+        # Sensors list
+        self.sensors = []
+
+        # Port
+        self.port = None
+
+        self.status_lbl.text = " Opening interface (serial port)\n"
+        self.status_lbl.text = " Trying to connect...\n"
+
+        # Connection
+        self.c = OBDConnection()
+        self.c.connect()
+        connected = False
+        while not connected:
+            connected = self.c.is_connected()
+            self.status_lbl.text = ""
+            self.status_lbl.text = " Trying to connect ..." + time.asctime()
+            if connected:
+                break
+
+        if not connected:
+            self.status_lbl.text = " Not connected\n"
+            return False
+        else:
+            self.status_lbl.text = ""
+            port_name = self.c.get_port_name()
+            if port_name:
+                self.status_lbl.text = " Failed Connection: " + port_name +"\n"
+                self.status_lbl.text = " Please hold alt & esc to view terminal."
+            self.status_lbl.text = str(self.c.get_output())
+            self.sensors = self.c.get_sensors()
+            self.port = self.c.get_port()
+
 
 class ThreadedApp(App):
+
+    def on_start(self):
+        self.root.start_second_thread("3")
 
     def on_stop(self):
         # The Kivy event loop is about to stop, set a stop signal;
