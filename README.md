@@ -1,3 +1,9 @@
+kivy
+version: 1.10.1
+
+kivy garden:
+garden install gauge
+
 pyobd
 =====
 

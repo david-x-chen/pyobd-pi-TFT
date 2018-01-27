@@ -1,0 +1,47 @@
+<AnimWidget@Widget>:
+    canvas:
+        Color:
+            rgba: 0.7, 0.3, 0.9, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    size_hint: None, None
+    size: 400, 30
+
+
+<OBDWidget>:
+    cols: 1
+
+    canvas:
+        Color:
+            rgba: 0.9, 0.9, 0.9, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    anim_box: anim_box
+    but_1: but_1
+    lab_1: lab_1
+    lab_2: lab_2
+
+    Button:
+        id: but_1
+        font_size: 20
+        text: 'Start second thread'
+        on_press: root.start_second_thread(lab_2.text)
+
+    Label:
+        id: lab_1
+        font_size: 30
+        color: 0.6, 0.6, 0.6, 1
+        text_size: self.width, None
+        halign: 'center'
+
+    AnchorLayout:
+        id: anim_box
+
+    Label:
+        id: lab_2
+        font_size: 100
+        color: 0.8, 0, 0, 1
+        text: '3'
