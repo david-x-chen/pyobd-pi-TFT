@@ -1,5 +1,6 @@
 
 from obd_capture import OBD_Capture
+from threading import Thread
 
 class OBDConnection(object):
     """
@@ -12,11 +13,11 @@ class OBDConnection(object):
     def get_capture(self):
         return self.c
 
-    def obd_connect(o):
+    def obd_connect(self, o):
         o.connect()
 
     def connect(self):
-        self.t = Thread(target=obd_connect, args=(self.c,))
+        self.t = Thread(target=self.obd_connect, args=(self.c,))
         self.t.start()
 
     def is_connected(self):
