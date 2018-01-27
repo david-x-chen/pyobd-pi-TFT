@@ -91,12 +91,19 @@ class OBDWidget(GridLayout):
         self.c = OBDConnection()
         self.c.connect()
         connected = False
+
+        failedCount = 0
         while not connected:
             connected = self.c.is_connected()
             self.status_lbl.text = ""
             self.status_lbl.text = " Trying to connect ..." + time.asctime()
             if connected:
                 break
+
+            if failedCount > 5:
+                self.root.stop.set()
+
+            failedCount++
 
         if not connected:
             self.status_lbl.text = " Not connected\n"
