@@ -103,7 +103,7 @@ class OBDWidget(GridLayout):
             if failedCount > 5:
                 self.root.stop.set()
 
-            failedCount++
+            failedCount += 1
 
         if not connected:
             self.status_lbl.text = " Not connected\n"
