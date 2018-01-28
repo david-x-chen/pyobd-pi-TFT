@@ -76,7 +76,7 @@ class OBDWidget(GridLayout):
         self.lab_rpm_name.text = ''
         self.lab_rpm_value.text = ''
         self.remove_widget(self.anim_box)
-        self.remove_widget(self.statusBox)
+        self.status_lbl.text = ''
         self.lab_speed_name.text = ''
         self.lab_speed_value.text = ''
 

@@ -26,47 +26,42 @@
     lab_speed_value: lab_speed_value
     status_lbl: status_lbl
 
-    rpmBox: rpmBox
-    speedBox: speedBox
-    statusBox: statusBox
+    #SPEED
+    Label:
+        id: lab_speed_name
+        font_size: 20
+        color: 0.6, 0.6, 0.6, 1
+        text_size: self.width, None
 
-    BoxLayout:
-        id: speedBox
-        Label:
-            id: lab_speed_name
-            font_size: 20
-            color: 0.6, 0.6, 0.6, 1
-            #text_size: self.width, None
-
-        Label:
-            id: lab_speed_value
-            font_size: 350
-            color: 0, 0, 0.8, 1
-            text: '0'
-            halign: 'center'
+    Label:
+        id: lab_speed_value
+        font_size: 250
+        color: 0, 0, 0.8, 1
+        text: '0'
+        halign: 'center'
 
     AnchorLayout:
         id: anim_box
 
-    BoxLayout:
-        id: rpmBox
-        Label:
-            id: lab_rpm_name
-            font_size: 20
-            color: 0.6, 0.6, 0.6, 1
-            #text_size: self.width, None
+    #RPM
+    Label:
+        id: lab_rpm_name
+        font_size: 20
+        color: 0.6, 0.6, 0.6, 1
+        text_size: self.width, None
 
-        Label:
-            id: lab_rpm_value
-            font_size: 40
-            color: 0.8, 0, 0, 1
-            text: '0'
-            halign: 'center'
+    Label:
+        id: lab_rpm_value
+        font_size: 40
+        color: 0.8, 0, 0, 1
+        text: '0'
+        halign: 'center'
 
-    BoxLayout:
-        id: statusBox
-        Label:
-            id: status_lbl
-            #font_size: 100
-            color: 0.8, 0, 0, 1
-            text: "Connecting..."
+    #Status
+    Label:
+        id: status_lbl
+        #font_size: 100
+        color: 0.8, 0, 0, 1
+        text: "Connecting..."
+        text_size: self.width, None
+        halign: 'center'
