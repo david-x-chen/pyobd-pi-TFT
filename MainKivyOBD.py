@@ -75,7 +75,9 @@ class OBDWidget(GridLayout):
         self.lab_rpm_name.text = ''
         self.lab_rpm_value.text = ''
         self.remove_widget(self.anim_box)
-        self.remove_widget(self.status_lbl.text)
+        self.status_lbl.text = ''
+        self.lab_speed_name.text = ''
+        self.lab_speed_value.text = ''
 
     def connect(self, event):
         self.update_status("connecting...")
@@ -110,7 +112,7 @@ class OBDWidget(GridLayout):
 
     def refresh(self, event):
     	while True:
-    	    time.sleep(1)
+            time.sleep(1)
             self.displaySensorInfo()
 
     def start_connection(self):
@@ -121,7 +123,7 @@ class OBDWidget(GridLayout):
         self.displaySensorInfo()
 
         time.sleep(1)
-	    threading.Thread(target=self.refresh, args=(None,)).start()
+        threading.Thread(target=self.refresh, args=(None,)).start()
 
     def getSensorsToDisplay(self, istart):
         sensors_display = []
