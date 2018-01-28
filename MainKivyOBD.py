@@ -39,7 +39,7 @@ class OBDWidget(GridLayout):
         Clock.schedule_once(self.connecting, 0)
 
         # Do some thread blocking operations.
-        time.sleep(5)
+        time.sleep(1)
 
         # Update a widget property in the main thread by decorating the
         # called function with @mainthread.
@@ -117,14 +117,19 @@ class OBDWidget(GridLayout):
         return sensors_display
 
     def refresh(self, event):
-        self.displaySensorInfo(sensors)
+	while True:
+	    time.sleep(1)
+            self.displaySensorInfo()
 
     def start_connection(self):
 
         self.connect(None)
         self.update_status("")
 
-        self.displaySensorInfo(sensors)
+        self.displaySensorInfo()
+
+        time.sleep(1)
+	threading.Thread(target=self.refresh, args=(None,)).start()
 
     def displaySensorInfo(self):
         sensors = self.getSensorsToDisplay(self.istart)
