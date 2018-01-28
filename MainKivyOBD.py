@@ -13,20 +13,19 @@ Builder.load_file("MainKivyOBD.kv")
 
 class OBDWidget(GridLayout):
 
-    def __init__(self):
-        # Connection
-        self.connection = None
+    # Connection
+    connection = None
 
-        # Sensors
-        self.istart = 0
-        self.sensors = []
+    # Sensors
+    istart = 0
+    sensors = []
 
-        # Port
-        self.port = None
+    # Port
+    port = None
 
-        # List to hold children widgets
-        self.boxes = []
-        self.texts = []
+    # List to hold children widgets
+    boxes = []
+    texts = []
 
     stop = threading.Event()
 
@@ -51,16 +50,12 @@ class OBDWidget(GridLayout):
         self.clean_up()
 
         # Start a new thread with an infinite loop and stop the current one.
-        #threading.Thread(target=self.showSensors).start()
-        #self.showSensors()
-        print(self.sensors)
+        threading.Thread(target=self.showSensors).start()
 
     def start_connection(self, *args):
 
         # Update a widget property.
         self.lab_1.text = 'Connecting to ELM device...'
-
-        self.connect(None)
 
         # Create and add a new widget.
         anim_bar = Factory.AnimWidget()
@@ -137,6 +132,8 @@ class OBDWidget(GridLayout):
             itext += 1
 
     def showSensors(self):
+
+        self.connect(None)
 
         sensors = self.getSensorsToDisplay(self.istart)
         print(sensors)
