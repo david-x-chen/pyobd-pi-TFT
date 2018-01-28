@@ -110,7 +110,7 @@ class OBDWidget(GridLayout):
             if port_name:
                 self.update_status(" Failed Connection: " + port_name +"\n")
                 self.update_status(" Please hold alt & esc to view terminal.")
-            self.update_status(str(self.c.get_output()))
+            self.update_status(str(self.connection.get_output()))
             self.sensors = self.connection.get_sensors()
             self.port = self.connection.get_port()
 
