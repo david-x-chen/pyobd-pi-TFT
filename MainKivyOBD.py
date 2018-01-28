@@ -147,12 +147,12 @@ class OBDWidget(GridLayout):
             # Text for sensor value
             if type(value)==float:
                 value = str("%.2f"%round(value, 3))
-
-            self.lab_2.text = value
+            
+            self.lab_2.text = str(value)
             # Text for sensor name
             self.lab_1.text = name + " " + unit
 
-            print(name + ": " + value + " " + unit)
+            print(name + ": " + str(value) + " " + unit)
 
 class ThreadedApp(App):
 
