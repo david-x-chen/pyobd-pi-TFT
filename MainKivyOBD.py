@@ -13,6 +13,21 @@ Builder.load_file("MainKivyOBD.kv")
 
 class OBDWidget(GridLayout):
 
+    def __init__(self):
+        # Connection
+        self.connection = None
+
+        # Sensors
+        self.istart = 0
+        self.sensors = []
+
+        # Port
+        self.port = None
+
+        # List to hold children widgets
+        self.boxes = []
+        self.texts = []
+
     stop = threading.Event()
 
     def start_obd_connection(self):
@@ -36,7 +51,9 @@ class OBDWidget(GridLayout):
         self.clean_up()
 
         # Start a new thread with an infinite loop and stop the current one.
-        threading.Thread(target=self.showSensors).start()
+        #threading.Thread(target=self.showSensors).start()
+        #self.showSensors()
+        print(self.sensors)
 
     def start_connection(self, *args):
 
@@ -68,20 +85,6 @@ class OBDWidget(GridLayout):
     def connect(self, event):
         self.update_status("connecting...")
 
-        # Connection
-        self.connection = None
-
-        # Sensors
-        self.istart = 0
-        self.sensors = []
-
-        # Port
-        self.port = None
-
-        # List to hold children widgets
-        self.boxes = []
-        self.texts = []
-
         self.update_status(" Opening interface (serial port)\n")
         self.update_status(" Trying to connect...\n")
 
@@ -90,16 +93,12 @@ class OBDWidget(GridLayout):
         self.connection.connect()
         connected = False
 
-        failedCount = 0
         while not connected:
             connected = self.connection.is_connected()
             self.update_status("")
             self.update_status(" Trying to connect ..." + time.asctime())
             if connected:
-                print(failedCount)
                 break
-
-            failedCount += 1
 
         if not connected:
             self.update_status(" Not connected\n")
@@ -113,6 +112,7 @@ class OBDWidget(GridLayout):
             self.update_status(str(self.connection.get_output()))
             self.sensors = self.connection.get_sensors()
             self.port = self.connection.get_port()
+            print(self.sensors)
 
     def getSensorsToDisplay(self, istart):
         sensors_display = []
