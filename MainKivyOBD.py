@@ -36,7 +36,7 @@ class OBDWidget(GridLayout):
         # Remove a widget, update a widget property, create a new widget,
         # add it and animate it in the main thread by scheduling a function
         # call with Clock.
-        Clock.schedule_once(self.start_connection, 0)
+        Clock.schedule_once(self.connecting, 0)
 
         # Do some thread blocking operations.
         time.sleep(5)
@@ -50,9 +50,9 @@ class OBDWidget(GridLayout):
         self.clean_up()
 
         # Start a new thread with an infinite loop and stop the current one.
-        threading.Thread(target=self.showSensors).start()
+        threading.Thread(target=self.start_connection).start()
 
-    def start_connection(self, *args):
+    def connecting(self, *args):
 
         # Update a widget property.
         self.lab_1.text = 'Connecting to ELM device...'
@@ -117,26 +117,18 @@ class OBDWidget(GridLayout):
         return sensors_display
 
     def refresh(self, event):
-        sensors = self.getSensorsToDisplay(self.istart)
+        self.displaySensorInfo(sensors)
 
-        itext = 0
-        for index, sensor in sensors:
-
-            (name, value, unit) = self.port.sensor(index)
-            if type(value)==float:
-                value = str("%.2f"%round(value, 3))
-
-            if itext<len(self.texts):
-                self.texts[itext*2].SetLabel(str(value))
-
-            itext += 1
-
-    def showSensors(self):
+    def start_connection(self):
 
         self.connect(None)
         self.update_status("")
 
+        self.displaySensorInfo(sensors)
+
+    def displaySensorInfo(self):
         sensors = self.getSensorsToDisplay(self.istart)
+
         print(sensors)
 
         # Create a box for each sensor
@@ -147,7 +139,7 @@ class OBDWidget(GridLayout):
             # Text for sensor value
             if type(value)==float:
                 value = str("%.2f"%round(value, 3))
-            
+
             self.lab_2.text = str(value)
             # Text for sensor name
             self.lab_1.text = name + " " + unit
