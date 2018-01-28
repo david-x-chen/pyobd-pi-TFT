@@ -69,9 +69,6 @@ class OBDWidget(GridLayout):
         self.update_status("connecting...")
 
         # Connection
-        self.c = None
-
-        # Connection
         self.connection = None
 
         # Sensors
@@ -89,13 +86,13 @@ class OBDWidget(GridLayout):
         self.update_status(" Trying to connect...\n")
 
         # Connection
-        self.c = OBDConnection()
-        self.c.connect()
+        self.connection = OBDConnection()
+        self.connection.connect()
         connected = False
 
         failedCount = 0
         while not connected:
-            connected = self.c.is_connected()
+            connected = self.connection.is_connected()
             self.update_status("")
             self.update_status(" Trying to connect ..." + time.asctime())
             if connected:
@@ -112,22 +109,13 @@ class OBDWidget(GridLayout):
             return False
         else:
             self.update_status("")
-            port_name = self.c.get_port_name()
+            port_name = self.connection.get_port_name()
             if port_name:
                 self.update_status(" Failed Connection: " + port_name +"\n")
                 self.update_status(" Please hold alt & esc to view terminal.")
             self.update_status(str(self.c.get_output()))
-            self.sensors = self.c.get_sensors()
-            self.port = self.c.get_port()
-
-    def setConnection(self, connection):
-        self.connection = connection
-
-    def setSensors(self, sensors):
-        self.sensors = sensors
-
-    def setPort(self, port):
-        self.port = port
+            self.sensors = self.connection.get_sensors()
+            self.port = self.connection.get_port()
 
     def getSensorsToDisplay(self, istart):
         sensors_display = []
