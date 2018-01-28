@@ -17,7 +17,7 @@ class OBDWidget(GridLayout):
     connection = None
 
     # Sensors
-    istart = 13 #RPM
+    istart = 11 #RPM
     sensors = []
 
     # Port
@@ -98,17 +98,16 @@ class OBDWidget(GridLayout):
 
         if not connected:
             self.update_status(" Not connected\n")
-            return False
-        else:
-            self.update_status("")
             port_name = self.connection.get_port_name()
             if port_name:
                 self.update_status(" Failed Connection: " + port_name +"\n")
                 self.update_status(" Please hold alt & esc to view terminal.")
+            return False
+        else:
+            self.update_status("")
             self.update_status(str(self.connection.get_output()))
             self.sensors = self.connection.get_sensors()
             self.port = self.connection.get_port()
-            print(self.sensors)
 
     def getSensorsToDisplay(self, istart):
         sensors_display = []
@@ -150,11 +149,10 @@ class OBDWidget(GridLayout):
                 value = str("%.2f"%round(value, 3))
 
             self.lab_2.text = value
-
-            print(value)
-
             # Text for sensor name
             self.lab_1.text = name + " " + unit
+
+            print(name + ": " + value + " " + unit)
 
 class ThreadedApp(App):
 
