@@ -17,7 +17,7 @@ class OBDWidget(GridLayout):
     connection = None
 
     # Sensors
-    istart = 0
+    istart = 13 #RPM
     sensors = []
 
     # Port
@@ -75,6 +75,7 @@ class OBDWidget(GridLayout):
     def clean_up(self):
         self.lab_1.text = ''
         self.lab_2.text = ''
+        self.status_lbl.text = ''
         self.remove_widget(self.anim_box)
 
     def connect(self, event):
@@ -134,6 +135,7 @@ class OBDWidget(GridLayout):
     def showSensors(self):
 
         self.connect(None)
+        self.update_status("")
 
         sensors = self.getSensorsToDisplay(self.istart)
         print(sensors)
