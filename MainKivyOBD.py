@@ -17,6 +17,7 @@ class OBDWidget(GridLayout):
     connection = None
 
     # Sensors
+    istart = 0
     sensors = []
 
     # Port
@@ -133,15 +134,15 @@ class OBDWidget(GridLayout):
         return sensors_display
 
     def displaySensorInfo(self):
-        istart = 10 #speed
+        self.istart = 12 #speed
         sensors = self.getSensorsToDisplay(self.istart)
 
-        sensorInfo(sensors, self.lab_rpm_name, self.lab_rpm_value)
+        self.sensorInfo(sensors, self.lab_speed_name, self.lab_speed_value)
 
-        istart = 11 #rpm
+        self.istart = 11 #rpm
         sensors = self.getSensorsToDisplay(self.istart)
 
-        sensorInfo(sensors, self.lab_rpm_name, self.lab_rpm_value)
+        self.sensorInfo(sensors, self.lab_rpm_name, self.lab_rpm_value)
 
     def sensorInfo(self, sensors, nameLabel, valueLabel):
         print(sensors)
