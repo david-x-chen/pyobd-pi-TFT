@@ -20,12 +20,27 @@
             size: self.size
 
     anim_box: anim_box
-    lab_1: lab_1
-    lab_2: lab_2
+    lab_rpm_name: lab_rpm_name
+    lab_rpm_value: lab_rpm_value
+    lab_speed_name: lab_speed_name
+    lab_speed_value: lab_speed_value
     status_lbl: status_lbl
 
     Label:
-        id: lab_1
+        id: lab_speed_name
+        font_size: 30
+        color: 0.6, 0.6, 0.6, 1
+        text_size: self.width, None
+        halign: 'center'
+
+    Label:
+        id: lab_speed_value
+        font_size: 100
+        color: 0, 0, 0.8, 1
+        text: '3'
+
+    Label:
+        id: lab_rpm_name
         font_size: 30
         color: 0.6, 0.6, 0.6, 1
         text_size: self.width, None
@@ -35,8 +50,8 @@
         id: anim_box
 
     Label:
-        id: lab_2
-        font_size: 100
+        id: lab_rpm_value
+        font_size: 50
         color: 0.8, 0, 0, 1
         text: '3'
 

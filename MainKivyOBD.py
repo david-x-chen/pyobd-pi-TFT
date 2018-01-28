@@ -17,7 +17,6 @@ class OBDWidget(GridLayout):
     connection = None
 
     # Sensors
-    istart = 11 #RPM
     sensors = []
 
     # Port
@@ -55,7 +54,7 @@ class OBDWidget(GridLayout):
     def connecting(self, *args):
 
         # Update a widget property.
-        self.lab_1.text = 'Connecting to ELM device...'
+        self.lab_rpm_name.text = 'Connecting to ELM device...'
 
         # Create and add a new widget.
         anim_bar = Factory.AnimWidget()
@@ -73,10 +72,10 @@ class OBDWidget(GridLayout):
 
     @mainthread
     def clean_up(self):
-        self.lab_1.text = ''
-        self.lab_2.text = ''
-        self.status_lbl.text = ''
+        self.lab_rpm_name.text = ''
+        self.lab_rpm_value.text = ''
         self.remove_widget(self.anim_box)
+        self.remove_widget(self.status_lbl.text)
 
     def connect(self, event):
         self.update_status("connecting...")
@@ -109,16 +108,9 @@ class OBDWidget(GridLayout):
             self.sensors = self.connection.get_sensors()
             self.port = self.connection.get_port()
 
-    def getSensorsToDisplay(self, istart):
-        sensors_display = []
-        if istart<len(self.sensors):
-            iend = istart + 1
-            sensors_display = self.sensors[istart:iend]
-        return sensors_display
-
     def refresh(self, event):
-	while True:
-	    time.sleep(1)
+    	while True:
+    	    time.sleep(1)
             self.displaySensorInfo()
 
     def start_connection(self):
@@ -129,13 +121,28 @@ class OBDWidget(GridLayout):
         self.displaySensorInfo()
 
         time.sleep(1)
-	threading.Thread(target=self.refresh, args=(None,)).start()
+	    threading.Thread(target=self.refresh, args=(None,)).start()
+
+    def getSensorsToDisplay(self, istart):
+        sensors_display = []
+        if istart < len(self.sensors):
+            iend = istart + 1
+            sensors_display = self.sensors[istart:iend]
+        return sensors_display
 
     def displaySensorInfo(self):
+        istart = 10 #speed
         sensors = self.getSensorsToDisplay(self.istart)
 
-        print(sensors)
+        sensorInfo(sensors, self.lab_rpm_name, self.lab_rpm_value)
 
+        istart = 11 #rpm
+        sensors = self.getSensorsToDisplay(self.istart)
+
+        sensorInfo(sensors, self.lab_rpm_name, self.lab_rpm_value)
+
+    def sensorInfo(self, sensors, nameLabel, valueLabel):
+        print(sensors)
         # Create a box for each sensor
         for index, sensor in sensors:
 
@@ -145,9 +152,9 @@ class OBDWidget(GridLayout):
             if type(value)==float:
                 value = str("%.2f"%round(value, 3))
 
-            self.lab_2.text = str(value)
+            valueLabel.text = str(value)
             # Text for sensor name
-            self.lab_1.text = name + " " + unit
+            nameLabel.text = name + " " + unit
 
             print(name + ": " + str(value) + " " + unit)
 
