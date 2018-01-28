@@ -134,12 +134,12 @@ class OBDWidget(GridLayout):
         return sensors_display
 
     def displaySensorInfo(self):
-        self.istart = 12 #speed
+        self.istart = 7 #speed
         sensors = self.getSensorsToDisplay(self.istart)
 
         self.sensorInfo(sensors, self.lab_speed_name, self.lab_speed_value)
 
-        self.istart = 11 #rpm
+        self.istart = 6 #rpm
         sensors = self.getSensorsToDisplay(self.istart)
 
         self.sensorInfo(sensors, self.lab_rpm_name, self.lab_rpm_value)
