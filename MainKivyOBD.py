@@ -96,10 +96,7 @@ class OBDWidget(GridLayout):
             self.update_status("")
             self.update_status(" Trying to connect ..." + time.asctime())
             if connected:
-                break
-
-            if failedCount > 5:
-                self.stop.set()
+                print(failedCount)
                 break
 
             failedCount += 1
@@ -142,6 +139,7 @@ class OBDWidget(GridLayout):
     def showSensors(self):
 
         sensors = self.getSensorsToDisplay(self.istart)
+        print(sensors)
 
         # Create a box for each sensor
         for index, sensor in sensors:
