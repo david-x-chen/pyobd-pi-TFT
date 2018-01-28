@@ -11,6 +11,8 @@
 
 <OBDWidget>:
     cols: 1
+    spacing: 10
+    padding: 10
 
     canvas:
         Color:
@@ -37,13 +39,13 @@
             font_size: 20
             color: 0.6, 0.6, 0.6, 1
             text_size: self.width, None
-            halign: 'center'
 
         Label:
             id: lab_speed_value
             font_size: 350
             color: 0, 0, 0.8, 1
             text: '0'
+            halign: 'center'
 
     AnchorLayout:
         id: anim_box
@@ -55,13 +57,13 @@
             font_size: 20
             color: 0.6, 0.6, 0.6, 1
             text_size: self.width, None
-            halign: 'center'
 
         Label:
             id: lab_rpm_value
             font_size: 40
             color: 0.8, 0, 0, 1
             text: '0'
+            halign: 'center'
 
     BoxLayout:
         id: statusBox
